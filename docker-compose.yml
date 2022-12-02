@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  mysql:
+    container_name: giti
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER: "tomato"
+      MYSQL_PASSWORD: "tomato"
+      MYSQL_DATABASE: "tomato_giti"
+    ports:
+      - "3307:3306"
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
