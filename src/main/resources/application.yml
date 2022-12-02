@@ -21,4 +21,7 @@ spring:
       hibernate:
         format_sql: true
 
+  github:
+    token: ${GITHUB_TOKEN}
+
 debug: true
