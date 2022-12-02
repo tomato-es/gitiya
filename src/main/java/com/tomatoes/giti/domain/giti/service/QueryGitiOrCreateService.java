@@ -47,9 +47,9 @@ public class QueryGitiOrCreateService {
         GithubInformationResponse githubInformation = githubClient.getGithubInformation(githubId);
         int contributions = githubGraphqlClient.getContributions(githubId);
 
-        sb.append(githubInformation.getFollowers() > githubInformation.getFollowing() ? "E" : "I");
+        sb.append(githubInformation.getFollowers() > 50 || githubInformation.getFollowers() > githubInformation.getFollowing() ? "E" : "I");
         sb.append(randomBoolean() ? "N" : "S");
-        sb.append(githubInformation.getBio().length() >= 80 ? "F" : "T");
+        sb.append((githubInformation.getBio() != null && githubInformation.getBio().length() >= 80) ? "F" : "T");
         sb.append(contributions > 750 ? "J" : "P");
         return sb.toString();
     }
