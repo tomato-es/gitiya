@@ -27,16 +27,34 @@ public class QueryGitiOrCreateService {
         Optional<Giti> giti = gitiRepository.findByGithubId(githubId);
 
         if (giti.isEmpty()) {
-            int contributions = githubGraphqlClient.getContributions(githubId);
-            GithubInformationResponse githubInformationResponse = githubClient.getGithubInformation(githubId);
-            Giti savedGiti = gitiRepository.save(Giti.builder().build());
-            return GitiResponse.of(savedGiti);
+            return GitiResponse.of(
+                    gitiRepository.save(createGiti(githubId))
+            );
         }
 
         return GitiResponse.of(giti.get());
     }
 
-    private Giti createGiti() {
-        return null;
+    private Giti createGiti(String githubId) {
+        return Giti.builder()
+                .githubId(githubId)
+                .giti(generateGiti(githubId))
+                .build();
+    }
+
+    private String generateGiti(String githubId) {
+        StringBuilder sb = new StringBuilder();
+        GithubInformationResponse githubInformation = githubClient.getGithubInformation(githubId);
+        int contributions = githubGraphqlClient.getContributions(githubId);
+
+        sb.append(githubInformation.getFollowers() > githubInformation.getFollowing() ? "E" : "I");
+        sb.append(randomBoolean() ? "N" : "S");
+        sb.append(githubInformation.getBio().length() >= 80 ? "F" : "T");
+        sb.append(contributions > 750 ? "J" : "P");
+        return sb.toString();
+    }
+
+    public boolean randomBoolean(){
+        return Math.random() < 0.5;
     }
 }

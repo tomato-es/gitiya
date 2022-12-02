@@ -11,9 +11,6 @@ public class GithubInformationResponse {
     @JsonProperty("login")
     private String githubId;
 
-    @JsonProperty("avatar_url")
-    private String profileImage;
-
     private String bio;
     private int followers;
     private int following;

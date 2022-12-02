@@ -15,11 +15,11 @@ public class GithubGraphqlClient {
     private final GraphQLWebClient graphQLWebClient;
     private final GithubProperties githubProperties;
 
-    public int getContributions(String username) {
+    public int getContributions(String githubId) {
         GraphQLRequest request = GraphQLRequest.builder()
                 .header("Authorization", "bearer " + githubProperties.getToken())
                 .query("query { \n" +
-                        "  user(login: \"" + username + "\") {\n" +
+                        "  user(login: \"" + githubId + "\") {\n" +
                         "    contributionsCollection {\n" +
                         "      contributionCalendar {\n" +
                         "        totalContributions\n" +
