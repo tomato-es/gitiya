@@ -21,7 +21,11 @@ spring:
       hibernate:
         format_sql: true
 
-  github:
-    token: ${GITHUB_TOKEN}
+github:
+  token: ${GITHUB_TOKEN}
+
+graphql:
+  client:
+    url: https://api.github.com/graphql
 
 debug: true

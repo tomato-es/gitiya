@@ -12,4 +12,5 @@ public interface GithubClient {
     @GetMapping("/users/{username}")
 //    GithubInformationResponse getGithubInformation(@RequestHeader(value = "Authorization") String token, @PathVariable String username);
     GithubInformationResponse getGithubInformation(@PathVariable String username);
+    
 }
